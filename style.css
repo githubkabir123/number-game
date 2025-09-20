@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Burned&display=swap');
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ff7f50, #ffcc70);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 90vw;
+      max-width: 450px;
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .heading_text1 {
+      font-size: 2rem;
+      font-weight: bold;
+      font-family: 'Rubik Burned', cursive;
+      color: #ff5722;
+    }
+
+    .heading_text2 {
+      font-size: 0.9rem;
+      color: #444;
+      margin-top: 8px;
+    }
+
+    /* Form styling */
+    .from_container {
+      margin-top: 20px;
+    }
+
+    .input_box {
+      margin-bottom: 15px;
+    }
+
+    .input_box input {
+      width: 100%;
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 8px;
+      border: 2px solid #ff7f50;
+      outline: none;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .input_box input:focus {
+      border-color: #ff5722;
+      box-shadow: 0 0 5px rgba(255, 87, 34, 0.5);
+    }
+
+    .input_box button {
+      width: 100%;
+      padding: 10px;
+      background: #ff5722;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .input_box button:hover {
+      background: #e64a19;
+    }
+
+    /* Result Box */
+    .result_box {
+      margin-top: 15px;
+      text-align: left;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+
+    .result_box ul {
+      list-style: circle;
+      padding-left: 20px;
+    }
+
+    .result_box li {
+      margin: 5px 0;
+      font-size: 16px;
+      color: #333;
+    }
+
+    /* Restart Button */
+    .restart {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      font-size: 18px;
+      border: 2px solid #ff5722;
+      border-radius: 8px;
+      background: white;
+      color: #ff5722;
+      cursor: pointer;
+      transition: 0.3s;
+      display: none;
+    }
+
+    .restart:hover {
+      background: #ff5722;
+      color: white;
+    }
+
+    /* Score Display */
+    .score-display {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #ff5722;
+    }
+    .SpanStyle{
+        color: red;
+    }
+
+    /* Mobile friendly adjustments */
+    @media (max-width: 500px) {
+      .heading_text1 {
+        font-size: 1.6rem;
+      }
+
+      .heading_text2 {
+        font-size: 0.8rem;
+      }
+
+      .input_box input,
+      .input_box button {
+        font-size: 16px;
+      }
+    }
