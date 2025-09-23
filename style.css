@@ -128,6 +128,19 @@
     .SpanStyle{
         color: red;
     }
+    .confetti {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background-color: #fff;
+      top: 0;
+      animation: fall 3s linear forwards;
+      opacity: 0.9;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(720deg); }
+    }
 
     /* Mobile friendly adjustments */
     @media (max-width: 500px) {

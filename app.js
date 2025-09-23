@@ -12,9 +12,12 @@
     // Function to reset game
     function resetGame() {
       secretNumber = Math.floor(Math.random() * 100) + 1;
+      console.log("New Secret Number:", secretNumber); // For debugging
       points = 100;
       attempts = 0;
       guss_between = [0,100];
+      inputField.min = guss_between[0];
+      inputField.max = guss_between[1];
       ul.innerHTML = "";
       inputField.value = "";
       scoreDisplay.textContent = "Score: 100";
@@ -30,9 +33,13 @@
         return `Too high! Try a smaller number than ${guess}. between <span class="SpanStyle"> ${guss_between[0]}</span> and <span class="SpanStyle">${guss_between[1]}</span>`;
       } else if (guess < secretNumber) {
         if(guess > guss_between[0]){guss_between[0] = guess;
-        inputField.max = guss_between[0]}
+        inputField.min = guss_between[0]}
         return `Too low! Try a bigger number than ${guess}. between <span class="SpanStyle"> ${guss_between[0]} </span> and <span class="SpanStyle"> ${guss_between[1]}</span>`;
       } else {
+        launchConfetti();
+        // Call this when a player wins
+        playWinningTone();
+
         return `🎉 Correct! The number was ${secretNumber}. Your final score is ${points}.`;
       }
     }
@@ -70,6 +77,55 @@
 
       inputField.value = "";
     });
+
+
+    // ---------- Confetti ----------
+    function launchConfetti() {
+      console.log("Confetti launched!");
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+        confetti.style.animationDuration = 2 + Math.random() * 4 + 's';
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+          confetti.remove();
+        }, 6000);
+      }
+    }
+    // ---------- Sound Effect ----------
+    // ---------- Winning Sound Effect ----------
+function playWinningTone() {
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+  // Sequence of frequencies for a winning sound
+  const frequencies = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+  const duration = 0.2; // seconds for each note
+
+  frequencies.forEach((freq, index) => {
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+
+    oscillator.type = 'triangle'; // smoother than 'sine'
+    oscillator.frequency.value = freq;
+
+    // connect nodes
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    const startTime = audioCtx.currentTime + index * duration;
+    const endTime = startTime + duration;
+
+    // Schedule start and stop
+    oscillator.start(startTime);
+    gainNode.gain.setValueAtTime(0.2, startTime); // volume
+    gainNode.gain.exponentialRampToValueAtTime(0.0001, endTime);
+    oscillator.stop(endTime);
+  });
+}
+
 
     // Restart button click
     restartBtn.addEventListener("click", (e) => {
